@@ -1,0 +1,184 @@
+
+body{
+  position: relative;
+}
+
+#content{
+  height:100%;
+}
+.row.content {
+  height: auto;
+  padding: 10px;
+}
+
+#map{
+  width: inherit;
+  height: 500px;
+}
+
+.mapboxgl-popup{
+  max-width: 400px !important;
+  font-family: 'Arial';
+  font-size: 10pt;
+}
+
+.popupInside{
+  padding: 5px !important;
+  padding-bottom: 1px !important;
+}
+
+.mapboxgl-popup-close-button{
+  padding: 3px !important;
+}
+
+.infobar{
+  background-color:	#efe9e1;
+}
+
+form{
+  padding: 10px 0px;
+  padding-bottom: 15px;
+}
+
+h3{
+  padding-bottom: 0px;
+}
+
+.group{
+  padding: 10px 0px;
+}
+
+h6{
+  font-weight: bold;
+}
+
+label{
+  font-weight: bold;
+}
+.searchfield{
+  width: 80%;
+}
+
+h5{
+  font-size: 12pt;
+  margin: 0px;
+}
+
+.unchangingVals{
+  margin-top: 10px;
+  padding: 5px;
+  border-top: 1px dashed black;
+}
+
+header{
+  padding: 5px;
+  background-color: #00274c;
+  left:0;
+  bottom: 0;
+  width: 100%;
+  margin: 0px !important;
+}
+.headthing{
+  padding: 0px;
+  width: inherit;
+}
+header img{
+  padding: 5px;
+  height: 40px;
+}
+
+.maplegend{
+  padding: 5px 0px;
+
+}
+
+/* basic positioning */
+.legend {
+  border: 1px solid black;
+  list-style: none; 
+  padding: 6px;
+  margin: 0px;
+}
+
+.legend dd { 
+  margin: 0px;
+  padding-top: 3px;
+  padding-right: 15px;
+  font-size: 9pt;
+}
+
+.legend span { 
+  display:inline-block;
+  border: 1px solid #ccc;  
+  width: 20px; 
+  height: 15px; 
+}
+
+/* your colors */
+
+.legend .gray { 
+  background-color: gray; 
+}
+
+.legend .lightest { 
+  background-color: #FF7D01; 
+}
+.legend .light { 
+  background-color: #BF5C00;
+}
+.legend .medium { 
+  background-color: #994A00; 
+}
+
+.legend .dark{
+ background-color:#522700;
+}
+
+.legend .darkest{
+  background-color: #170B00;
+}
+
+
+.findroadheader{
+  margin: 0px;
+  padding: 0px;
+}
+
+#findsection{
+  padding: 0px 5px;
+}
+
+#roadPR{
+  margin: 0px;
+  padding-left: 5px;
+}
+
+#roadBPT{
+  margin: 0px;
+  padding-left: 5px;
+}
+
+#roadEPT{
+  margin: 0px;
+  padding-left: 5px;
+}
+
+.pr, .bpt, .ept{
+  padding: 10px 0px;
+}
+
+label{
+  margin: 0px;
+  padding: 0px;
+}
+small{
+  margin: 0px !important;
+  padding: 0px;
+  padding-left: 5px;
+}
+
+@media screen and (min-width:768px){
+  body{
+    height: 100vh;
+  }
+}

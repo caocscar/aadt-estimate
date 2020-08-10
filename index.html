@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- BS and FA -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- general style -->
+  <link rel="stylesheet" href="style.css">
+
+  <!--mapbox -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.2.1/mapbox-gl.js'></script>
+  <link href='https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/1.2.1/mapbox-gl.css' rel='stylesheet' />
+
+  <!-- javascript files -->
+  <script src='map.js'></script>
+  <title>AADT</title>
+</head>
+
+<body>
+  <!-- accessibility skip to main tab index -->
+  <header class="container-fluid">
+      <div class="row">
+        <div class = "headthing col-sm-12 d-flex align-items-center">
+            <a  href = "http://www.umtri.umich.edu/" target="_blank"><img src="umtri_logo.png"></a>
+          </div>
+      </div>
+    </header>
+  <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+  <div class = "container-fluid">
+
+    <div class = "row content" id="content">
+      <div class= "col-md-8">
+        <div class = "row mapboxmap">
+          <div class = "col-sm-12">
+              <div id="map"></div>
+          </div> <!--close col 12-->
+        </div> <!-- close row mapboxmap-->
+        <div class ="row">
+          <div class="col-sm-5 mapkey">
+            <div class="maplegend d-flex justify-content-start align-items-center">
+                <dl class="legend">
+                  <dt>AADT ESTIMATE</dt>
+                    <dd><span class="lightest"></span> 0 - 1000</dd>
+                    <dd><span class="light"></span> 1001 - 6000</dd>
+                    <dd><span class="medium"></span> 6001 - 8000</dd>
+                    <dd><span class="dark"></span> 8001 - 10000</dd>
+                    <dd><span class="darkest"></span> &gt10000</dd>
+                    <dd><span class="gray"></span> Not Available</dd>
+                </dl>
+            </div> <!--close maplegend-->
+          </div> <!--close colsm5 mapkey-->
+          <div class="col-sm-7 searchstuff">
+            <div class = "row findRoad">
+                <div class = "col-sm-12">
+                    <h3 class="findroadheader" id="valRDNAME">Road Name</h3>
+                    <div class = 'row'>
+
+                      <div class = "col-sm-4">
+                        <div class = "pr d-flex justify-content-start align-items-center">
+                            <h5>PR: </h5>
+                            <p id = "roadPR"></p>
+                          </div>
+                      </div>
+
+                      <div class = "col-sm-4">
+                        <div class = "bpt d-flex justify-content-start align-items-center">
+                            <h5>BPT: </h5>
+                            <p id="roadBPT"></p>
+                          </div>
+                      </div>
+
+                      <div class = "col-sm-4">
+                        <div class = "ept d-flex justify-content-start align-items-center">
+                            <h5>EPT: </h5>
+                            <p id="roadEPT"></p>
+                        </div>
+                      </div>
+
+                    </div> <!--close row-->
+                </div> <!-- close col 12-->
+              </div> <!-- close row findRoad-->
+          </div> <!--close searchstuff-->
+        </div> <!--close row-->
+        
+      </div> <!-- close col sm 7-->
+      <div class = "col-md-4 infobar">
+        <form onsubmit="calculateNewAADT()">
+         
+          <div class = "form group">
+              <div class= "labels d-flex justify-content-start align-items-center">
+                  <label for="inputNFC">NFC</label>
+                  <small class = "form-text text-muted">Between 0 and 7</small>
+              </div>
+              <input type="number" class = "form-control" id = "inputfieldNFC" aria-label="Functional Class" value="5" min="1" max="7">
+          </div>
+          <div class = "form group">
+              <div class= "labels d-flex justify-content-start align-items-center">
+                  <label for="inputRAMPID">RAMP</label>
+                  <small class = "form-text text-muted">0 = No, 1= Yes</small>
+              </div>
+            <input type="number" class = "form-control" id = "inputfieldRAMP" aria-label="Ramp" value="0" min="0" max="1">
+          </div>
+          <div class = "form group">
+              <div class= "labels d-flex justify-content-start align-items-center">
+                  <label for="inputRU">RURAL/URBAN</label>
+                  <small class = "form-text text-muted">0 = Rural, 1= Urban</small>
+              </div>
+            <input type="number" class = "form-control" id = "inputfieldRU" aria-label="Rural or Urban" value="1" min="0" max="1">
+          </div>
+          <div class = "form group">
+              <div class= "labels d-flex justify-content-start align-items-center">
+                  <label for="inputHOUSING">HOUSING UNITS IN CENSUS TRACT</label>
+              </div>
+            <input type="number" class = "form-control" id = "inputfieldHOUSING" aria-label="Housing" value="0" min="0">
+          </div>
+          <div class = "form group">
+              <div class= "labels d-flex justify-content-start align-items-center">
+                  <label for="inputNOVEHICLE">NUMBER OF VEHICLES IN CENSUS TRACT</label>
+              </div>
+            <input type="number" class = "form-control" id = "inputfieldNOVEHICLE" aria-label="Number of Vehicles" value="0" min="0">
+          </div>
+          <button type="submit" class = "btn btn-primary submitbutton" onclick = "calculateNewAADT()">Calculate AADT</button>
+        </form>
+        <div class = "unchangingVals">
+            <h4 id = "semcogAADT">AADT - SEMCOG</h4>
+            <p id = "valSemcogAADT">0</p>
+            <h4 id = "estimatedAADT">AADT - ESTIMATED</h4>
+            <!-- <p id = "estimAADT"></p> -->
+            <p id = "valEstimAADT">0</p>
+        </div>
+      </div> <!-- close col 4-->
+    </div>
+  </div>
+  <script>
+      createMap();
+  </script>
+
+  <!-- mapbox jquery and javascript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

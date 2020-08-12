@@ -25,7 +25,15 @@ function createMap() {
         center: [-83.84, 42.25],
         zoom: 14
     });
-
+    map.addControl(new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        autocomplete: true,
+        countries: 'us',
+        bbox: [-90.4, 41.7, -82.4, 48.2],
+        marker: { color: 'orange' },
+        mapboxgl: mapboxgl,
+        placeholder: 'Search Map',
+    }), 'top-left');
     map.addControl(new mapboxgl.NavigationControl());
 
     map.on('click', ({point, lngLat}) =>{

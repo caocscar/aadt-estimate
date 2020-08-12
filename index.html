@@ -62,28 +62,24 @@
                 <div class = "col-sm-12">
                     <h3 class="findroadheader" id="valRDNAME">Road Name</h3>
                     <div class = 'row'>
-
                       <div class = "col-sm-4">
                         <div class = "pr d-flex justify-content-start align-items-center">
                             <h5>PR: </h5>
                             <p id = "roadPR"></p>
                           </div>
                       </div>
-
                       <div class = "col-sm-4">
                         <div class = "bpt d-flex justify-content-start align-items-center">
                             <h5>BPT: </h5>
                             <p id="roadBPT"></p>
                           </div>
                       </div>
-
                       <div class = "col-sm-4">
                         <div class = "ept d-flex justify-content-start align-items-center">
                             <h5>EPT: </h5>
                             <p id="roadEPT"></p>
                         </div>
                       </div>
-
                     </div> <!--close row-->
                 </div> <!-- close col 12-->
               </div> <!-- close row findRoad-->
@@ -92,8 +88,7 @@
         
       </div> <!-- close col sm 7-->
       <div class = "col-md-4 infobar">
-        <form onsubmit="calculateNewAADT()">
-         
+        <form onsubmit="calculateNewAADT()">        
           <div class = "form group">
               <div class= "labels d-flex justify-content-start align-items-center">
                   <label for="inputNFC">NFC</label>
@@ -127,7 +122,7 @@
               </div>
             <input type="number" class = "form-control" id = "inputfieldNOVEHICLE" aria-label="Number of Vehicles" value="0" min="0">
           </div>
-          <button type="submit" class = "btn btn-primary submitbutton" onclick = "calculateNewAADT()">Calculate AADT</button>
+          <!-- <button type="submit" class = "btn btn-primary submitbutton" onclick = "calculateNewAADT()">Calculate AADT</button> -->
         </form>
         <div class = "unchangingVals">
             <h4 id = "semcogAADT">AADT - SEMCOG</h4>

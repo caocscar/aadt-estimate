@@ -133,6 +133,7 @@ function initRadio() {  // basemap radio button
         const layer = this.value === 'streets-v11' ? 'stchoi/cjz8u2gky3dqn1cmxm71d6yus' : 'mapbox/satellite-v9'
         map.setStyle(`mapbox://styles/${layer}`);
         currentLayer = this.value;
+        d3.select('#nfc-button').property('disabled', currentLayer === 'streets-v11' ? false : true)
     })
     d3.selectAll('.dropdown-item').on('click', function() { // updateRadio
         const value = d3.select(this).attr("value")
@@ -141,8 +142,8 @@ function initRadio() {  // basemap radio button
         dbutton.html(txt)
         d3.selectAll('.dropdown-item').classed('active', false)
         d3.select(`#nfc-${value}`).classed('active', true)
-        nfcFilter = ['==', ['get','NFC'], parseInt(value)]
-        map.setFilter("reducedallroads", value === "all" ? null : nfcFilter)        
+        nfcFilter = value === "all" ? null : ['==', ['get','NFC'], parseInt(value)]
+        map.setFilter("reducedallroads", nfcFilter)        
     })
 }
 

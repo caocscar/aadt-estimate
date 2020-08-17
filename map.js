@@ -1,16 +1,16 @@
 //globals that update and are updated
-var pr = 0 ;
-var bpt = "";
-var ept = "" ;
-var rdname = '' ;
-var nfc = 0 ;
-var censustract = "" ;
-var ru = 0 ;
-var housing = 0 ;
-var novehicle = "" ;
-var ramp = 0 ;
-var aadt = "" ;
-var estimaadt = 0 ;
+let pr = 0 ;
+let bpt = "";
+let ept = "" ;
+let rdname = '' ;
+let nfc = 0 ;
+let censustract = "" ;
+let ru = 0 ;
+let housing = 0 ;
+let novehicle = "" ;
+let ramp = 0 ;
+let aadt = "" ;
+let estimaadt = 0 ;
 
 
 // //input is roadid, populates sidebar form // return aadt
@@ -38,11 +38,11 @@ function createMap() {
 
     map.on('click', ({point, lngLat}) =>{
 
-        var features = map.queryRenderedFeatures(point, { layers: ['reducedallroads'] });
+        let features = map.queryRenderedFeatures(point, { layers: ['reducedallroads'] });
         // console.log(features);
-        var {properties: {PR, BPT, EPT, RDNAME, NFC, CENSUS_TRACT, RU, HOUSING, NO_VEHICLE, RAMP, AADT, ESTIMATED_AADT}} = features[0];
+        let {properties: {PR, BPT, EPT, RDNAME, NFC, CENSUS_TRACT, RU, HOUSING, NO_VEHICLE, RAMP, AADT, ESTIMATED_AADT}} = features[0];
 
-        var filter = features.reduce(function(memo, features) {
+        let filter = features.reduce(function(memo, features) {
 
             memo[1].push(features.properties.PR);
             memo[2].push(features.properties.BPT);

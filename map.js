@@ -14,9 +14,7 @@ let estimaadt = 0 ;
 
 // input is roadid, populates sidebar form // return aadt
 function createMap() {
-
     mapboxgl.accessToken = 'pk.eyJ1Ijoic3RjaG9pIiwiYSI6ImNqd2pkNWN0NzAyNnE0YW8xeTl5a3VqMXQifQ.Rq3qT82-ysDHcMsHGTBiQg';
-
     map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/stchoi/cjz8u2gky3dqn1cmxm71d6yus',
@@ -89,7 +87,12 @@ function createMap() {
               '#994A00', 8000,  //medium
               '#522700', 10000, //dark
               '#170B00' //darkest
-         ]);       
+         ]);
+         map.setPaintProperty('reducedallroads', 'line-opacity', ["step",
+            ["get", "ESTIMATED_AADT"],
+            0, 1, // opaque
+            1 // transparent
+        ]);     
          map.addSource('reducedallroads-highlight', {
             "type": "vector",
             "url": "mapbox://stchoi.3myu05ki"
@@ -134,11 +137,14 @@ function initRadio() {  // basemap radio button
         map.setStyle(`mapbox://styles/${layer}`);
         currentLayer = this.value;
         d3.select('#nfc-button').property('disabled', currentLayer === 'streets-v11' ? false : true)
+        if (currentLayer === 'streets-v11') {
+            map.setFilter("reducedallroads", nfcFilter)
+        }
     })
     d3.selectAll('.dropdown-item').on('click', function() { // updateRadio
         const value = d3.select(this).attr("value")
         const txt = d3.select(this).text()
-        let dbutton = d3.select('#dropdownMenuButton');
+        let dbutton = d3.select('#nfc-button');
         dbutton.html(txt)
         d3.selectAll('.dropdown-item').classed('active', false)
         d3.select(`#nfc-${value}`).classed('active', true)

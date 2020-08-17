@@ -12,38 +12,37 @@ let ramp = 0 ;
 let aadt = "" ;
 let estimaadt = 0 ;
 
-
-// //input is roadid, populates sidebar form // return aadt
+// input is roadid, populates sidebar form // return aadt
 function createMap() {
 
     mapboxgl.accessToken = 'pk.eyJ1Ijoic3RjaG9pIiwiYSI6ImNqd2pkNWN0NzAyNnE0YW8xeTl5a3VqMXQifQ.Rq3qT82-ysDHcMsHGTBiQg';
 
-
     map = new mapboxgl.Map({
         container: 'map',
         style: 'mapbox://styles/stchoi/cjz8u2gky3dqn1cmxm71d6yus',
+        // style: 'mapbox://styles/mapbox/streets-v11',
         center: [-83.84, 42.25],
         zoom: 14
     });
+    // add search bar
     map.addControl(new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         autocomplete: true,
         countries: 'us',
         bbox: [-90.4, 41.7, -82.4, 48.2],
-        marker: { color: 'orange' },
+        marker: { color: 'lightgreen' },
         mapboxgl: mapboxgl,
         placeholder: 'Search Map',
-    }), 'top-left');
-    map.addControl(new mapboxgl.NavigationControl());
+    }), 'top-right');
+    // add navigation controls
+    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
     map.on('click', ({point, lngLat}) =>{
 
         let features = map.queryRenderedFeatures(point, { layers: ['reducedallroads'] });
-        // console.log(features);
         let {properties: {PR, BPT, EPT, RDNAME, NFC, CENSUS_TRACT, RU, HOUSING, NO_VEHICLE, RAMP, AADT, ESTIMATED_AADT}} = features[0];
 
         let filter = features.reduce(function(memo, features) {
-
             memo[1].push(features.properties.PR);
             memo[2].push(features.properties.BPT);
             memo[3].push(features.properties.EPT);
@@ -53,8 +52,6 @@ function createMap() {
             ["in", 'BPT'],
             ["in", 'EPT']
         ]);
-
-
 
         map.setFilter("roads-highlighted", filter)
         // map.setPaintProperty('roads-highlighted', 'line-color', 'black');
@@ -80,10 +77,9 @@ function createMap() {
     })
 
     map.on('load', () => {
-      //https://docs.mapbox.com/mapbox-gl-js/api/#map#setpaintproperty
+      // https://docs.mapbox.com/mapbox-gl-js/api/#map#setpaintproperty
       // https://docs.mapbox.com/mapbox-gl-js/example/data-driven-circle-colors/
-      //https://docs.mapbox.com/help/tutorials/mapbox-gl-js-expressions/
-      //https://stackoverflow.com/questions/47951532/mapbox-gl-expressions
+      // https://docs.mapbox.com/help/tutorials/mapbox-gl-js-expressions/
         
          map.setPaintProperty('reducedallroads', 'line-color', ["step",
              ["get", "ESTIMATED_AADT"],
@@ -93,9 +89,7 @@ function createMap() {
               '#994A00', 8000,  //medium
               '#522700', 10000, //dark
               '#170B00' //darkest
-         ]);
-        
-
+         ]);       
          map.addSource('reducedallroads-highlight', {
             "type": "vector",
             "url": "mapbox://stchoi.3myu05ki"
@@ -119,15 +113,37 @@ function createMap() {
             }
         }, 'road-label');
     });
-    // https://bl.ocks.org/danswick/4906b495e0b206758f71
-      map.on('mouseenter', 'reducedallroads', () => {
-          map.getCanvas().style.cursor = 'pointer';
-      });
 
-      // Change it back to a pointer when it leaves.
-      map.on('mouseleave', 'reducedallroads', () => {
-          map.getCanvas().style.cursor = '';
-        });
+    // https://bl.ocks.org/danswick/4906b495e0b206758f71
+    map.on('mouseenter', 'reducedallroads', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    // Change it back to a pointer when it leaves.
+    map.on('mouseleave', 'reducedallroads', () => {
+        map.getCanvas().style.cursor = '';
+    });
+
+    initRadio()
+}
+
+currentLayer = 'streets-v11'
+function initRadio() {  // basemap radio button
+    d3.selectAll('.basemap').on('click', function() { // updateRadio
+        if (this.value === currentLayer) return;
+        const layer = this.value === 'streets-v11' ? 'stchoi/cjz8u2gky3dqn1cmxm71d6yus' : 'mapbox/satellite-v9'
+        map.setStyle(`mapbox://styles/${layer}`);
+        currentLayer = this.value;
+    })
+    d3.selectAll('.dropdown-item').on('click', function() { // updateRadio
+        const value = d3.select(this).attr("value")
+        const txt = d3.select(this).text()
+        let dbutton = d3.select('#dropdownMenuButton');
+        dbutton.html(txt)
+        d3.selectAll('.dropdown-item').classed('active', false)
+        d3.select(`#nfc-${value}`).classed('active', true)
+        nfcFilter = ['==', ['get','NFC'], parseInt(value)]
+        map.setFilter("reducedallroads", value === "all" ? null : nfcFilter)        
+    })
 }
 
 function updateVals(){
@@ -162,147 +178,4 @@ function updateVals(){
     } else  {
         valEstimAADT.innerHTML = estimaadt.toLocaleString();
     }
-  };
-
-// function updateFromSearch(object){
-//     console.log('got to updatefromsearch')
-//     aadt = object.properties.AADT;
-//     nfc = object.properties.NFC;
-//     ramp = object.properties.RAMP;
-//     ru = object.properties.RU;
-//     housing = object.properties.HOUSING;
-//     novehicle = object.properties.NO_VEHICLE;
-//     pr = object.properties.PR ;
-//     bpt = object.properties.BPT ;
-//     ept = object.properties.EPT ;
-//     rdname = object.properties.RDNAME ;
-//     censustract = object.properties.CENSUS_TRACT ;
-
-//     updateVals();
-// }
-
-// function listenForVals(){
-//     event.preventDefault();
-//     console.log("run")
-//     // valSemcogAADT = document.querySelector("#valSemcogAADT").value;
-//     inp_EPT = document.querySelector("#inputfieldEPT").value;
-//     inp_BPT = document.querySelector("#inputfieldBPT").value;
-//     inp_PR = parseInt(document.querySelector("#inputfieldPR").value);
-    
-//     map.queryRenderedFeatures({layers : ['reducedallroads']}).map(j => j)
-//                                                              .forEach( obj => {
-
-//                                                                   if ( obj.properties.EPT == inp_EPT && obj.properties.BPT == inp_BPT && obj.properties.PR == inp_PR){
-//                                                                       console.log("we found a match");
-//                                                                       console.log(obj);
-//                                                                                 selectOnMap(obj);
-//                                                                                 updateFromSearch(obj);
-//                                                                           }
-//                                                             });
-// }
-
-// function selectOnMap(road){
-//     // console.log(road);
-//       map.setFilter("roads-highlighted", [ "all",
-//       ["in", 'PR'],
-//       ["in", 'BPT'],
-//       ["in", 'EPT']
-//   ] );
-//       map.setPaintProperty('roads-highlighted', 'line-color', 'black');
-
-// }
-
-function calculateNewAADT(){
-    console.log("calculate");
-    event.preventDefault();
-    valEstimAADT = document.querySelector("#valEstimAADT");
-    val_NFC = parseInt(document.querySelector("#inputfieldNFC").value);
-    val_RAMP = parseInt(document.querySelector("#inputfieldRAMP").value);
-    val_RU = parseInt(document.querySelector("#inputfieldRU").value);
-    val_HOUSING = parseInt(document.querySelector("#inputfieldHOUSING").value);
-    val_NOVEHICLE = parseInt(document.querySelector("#inputfieldNOVEHICLE").value);
-
-  ;
-    let vehicHousing =(val_NOVEHICLE - val_HOUSING)/ 1000;
-
-    function coefficientNFC(){
-        if (val_NFC == 2){
-            return 14.118
-        } else if (val_NFC == 3){
-            return -170.121
-        } else if (val_NFC == 4){
-            return -169.488
-        } else if (val_NFC == 5){
-            return -208.668
-        } else {
-            return 0
-        };
-    };
-
-    function vehicleMinusHousing(){
-        return -14.128 * vehicHousing
-    };
-
-    function ruralUrban(){
-        if (val_RU == 1){
-            return 17.66
-        } else {
-            return 0
-        }
-    };
-    function rampFlag(){
-        return -193.921 * val_RAMP
-    };
-
-    function nfcRAMP(){
-        if (val_RAMP == 1){
-            if (val_NFC == 2){
-                return 22.136
-            } else if (val_NFC == 3){
-                return 67.665
-            } else {
-                return 0
-            }
-        } else {
-            return 0
-        }
-    };
-
-    function nfcVEHICLEHOUSING(){
-        if (val_NFC == 2){
-            return -4.817 * vehicHousing
-        } else if (val_NFC == 3){
-            return 21.998 * vehicHousing
-        } else if (val_NFC == 4){
-            return 7.281 * vehicHousing
-        } else if (val_NFC == 5){
-            return 10.741 * vehicHousing
-        } else {
-            return 0
-        }
-    };
-
-    function nfcIFURBAN(){
-        if (val_RU == 1){
-            if (val_NFC == 2){
-                return -29.5
-            } else if (val_NFC == 3){
-                return 21.006
-            } else if (val_NFC == 4){
-                return -10.039
-            } else if (val_NFC == 5){
-                return -3.349
-            } else {
-                return 0
-            }
-        } else {
-            return 0
-        }
-    };
-    
-
-    estimateAADT = Math.round( Math.pow((264.208 + coefficientNFC() + vehicleMinusHousing() + rampFlag() + ruralUrban() + nfcRAMP() + nfcVEHICLEHOUSING() +  nfcIFURBAN()), 2))
-
-    valEstimAADT.innerHTML = estimateAADT.toLocaleString();
-    // val_AADT.innerHTML = "we did it"
-}
+};

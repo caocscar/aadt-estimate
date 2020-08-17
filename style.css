@@ -1,76 +1,78 @@
 
-body{
+body {
   position: relative;
 }
 
-#content{
+#content {
   height:100%;
 }
+
 .row.content {
   height: auto;
   padding: 10px;
 }
 
-#map{
+#map {
   width: inherit;
   height: 500px;
 }
 
-.mapboxgl-popup{
+.mapboxgl-popup {
   max-width: 400px !important;
   font-family: 'Arial';
   font-size: 10pt;
 }
 
-.popupInside{
+.popupInside {
   padding: 5px !important;
   padding-bottom: 1px !important;
 }
 
-.mapboxgl-popup-close-button{
+.mapboxgl-popup-close-button {
   padding: 3px !important;
 }
 
-.infobar{
+.infobar {
   background-color:	#efe9e1;
 }
 
-form{
+form {
   padding: 10px 0px;
   padding-bottom: 15px;
 }
 
-h3{
+h3 {
   padding-bottom: 0px;
 }
 
-.group{
+.group {
   padding: 10px 0px;
 }
 
-h6{
+h6 {
   font-weight: bold;
 }
 
-label{
+label {
   font-weight: bold;
 }
-.searchfield{
+
+.searchfield {
   width: 80%;
 }
 
-h5{
+h5 {
   font-size: 12pt;
   margin: 0px;
 }
 
-.unchangingVals{
+.unchangingVals {
   margin-top: 10px;
   padding: 5px;
   border-top: 1px dashed black;
 }
 
-header{
+header {
   padding: 5px;
   background-color: #00274c;
   left:0;
@@ -78,16 +80,18 @@ header{
   width: 100%;
   margin: 0px !important;
 }
-.headthing{
+
+.headthing {
   padding: 0px;
   width: inherit;
 }
-header img{
+
+header img {
   padding: 5px;
   height: 40px;
 }
 
-.maplegend{
+.maplegend {
   padding: 5px 0px;
 
 }
@@ -115,7 +119,6 @@ header img{
 }
 
 /* your colors */
-
 .legend .gray { 
   background-color: gray; 
 }
@@ -123,62 +126,72 @@ header img{
 .legend .lightest { 
   background-color: #FF7D01; 
 }
+
 .legend .light { 
   background-color: #BF5C00;
 }
+
 .legend .medium { 
   background-color: #994A00; 
 }
 
-.legend .dark{
+.legend .dark {
  background-color:#522700;
 }
 
-.legend .darkest{
+.legend .darkest {
   background-color: #170B00;
 }
 
-
-.findroadheader{
+.findroadheader {
   margin: 0px;
   padding: 0px;
 }
 
-#findsection{
+#findsection {
   padding: 0px 5px;
 }
 
-#roadPR{
+#roadPR {
   margin: 0px;
   padding-left: 5px;
 }
 
-#roadBPT{
+#roadBPT {
   margin: 0px;
   padding-left: 5px;
 }
 
-#roadEPT{
+#roadEPT {
   margin: 0px;
   padding-left: 5px;
 }
 
-.pr, .bpt, .ept{
+.pr, .bpt, .ept {
   padding: 10px 0px;
 }
 
-label{
+label {
   margin: 0px;
   padding: 0px;
 }
-small{
+
+small {
   margin: 0px !important;
   padding: 0px;
   padding-left: 5px;
 }
 
-@media screen and (min-width:768px){
-  body{
+@media screen and (min-width:768px) {
+  body {
     height: 100vh;
   }
+}
+
+#menu {
+  position: fixed;
+  top: 60px;
+  background: #eee;
+  padding: 10px;
+  font-family: 'Open Sans', sans-serif;
 }

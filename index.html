@@ -19,9 +19,12 @@
   <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.min.js'></script>
   <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.5.1/mapbox-gl-geocoder.css'>
 
+  <!-- d3 utilities -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  
   <!-- javascript files -->
   <script src='map.js'></script>
-  <title>AADT</title>
+  <title>AADT Estimation</title>
 </head>
 
 <body>
@@ -41,8 +44,34 @@
         <div class = "row mapboxmap">
           <div class = "col-sm-12">
               <div id="map"></div>
+              <div id="menu">
+                <input class="basemap" id="streets-v11" type="radio" name="baselayer" value="streets-v11" checked>
+                <label for="streets-v11">streets</label>
+                <input class="basemap" id="satellite-v9" type="radio" name="baselayer" value="satellite-v9">
+                <label for="satellite-v9">satellite</label>
+                <!-- <input class="basemap" id="satellite-streets-v11" type="radio" name="baselayer" value="satellite-streets-v11">
+                <label for="satellite-streets-v11">satellite</label> -->
+              </div>
           </div> <!--close col 12-->
         </div> <!-- close row mapboxmap-->
+        <div class="row dropdowns">
+          <div class="col-sm-12">
+            <div class="dropdown btn-group dropright">
+              <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select NFC</button>
+              <div class="dropdown-menu time-period" id="NFC" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item active" id="nfc-all" value="all" checked>All NFC</a>
+                <a class="dropdown-item" id="nfc-1" value="1">NFC = 1</a>
+                <a class="dropdown-item" id="nfc-2" value="2">NFC = 2</a>
+                <a class="dropdown-item" id="nfc-3" value="3">NFC = 3</a>
+                <a class="dropdown-item" id="nfc-4" value="4">NFC = 4</a>
+                <a class="dropdown-item" id="nfc-5" value="5">NFC = 5</a>
+                <a class="dropdown-item" id="nfc-6" value="6">NFC = 6</a>
+                <a class="dropdown-item" id="nfc-7" value="7">NFC = 7</a>
+                <a class="dropdown-item" id="nfc-0" value="0">NFC = 0</a>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class ="row">
           <div class="col-sm-5 mapkey">
             <div class="maplegend d-flex justify-content-start align-items-center">
@@ -61,23 +90,23 @@
             <div class = "row findRoad">
                 <div class = "col-sm-12">
                     <h3 class="findroadheader" id="valRDNAME">Road Name</h3>
-                    <div class = 'row'>
-                      <div class = "col-sm-4">
-                        <div class = "pr d-flex justify-content-start align-items-center">
-                            <h5>PR: </h5>
-                            <p id = "roadPR"></p>
-                          </div>
+                    <div class="row">
+                      <div class="col-sm-4">
+                        <div class="pr d-flex justify-content-start align-items-center">
+                          <h5>PR: </h5>
+                          <p id="roadPR"></p>
+                        </div>
                       </div>
-                      <div class = "col-sm-4">
-                        <div class = "bpt d-flex justify-content-start align-items-center">
-                            <h5>BPT: </h5>
-                            <p id="roadBPT"></p>
-                          </div>
+                      <div class="col-sm-4">
+                        <div class="bpt d-flex justify-content-start align-items-center">
+                          <h5>BPT: </h5>
+                          <p id="roadBPT"></p>
+                        </div>
                       </div>
-                      <div class = "col-sm-4">
-                        <div class = "ept d-flex justify-content-start align-items-center">
-                            <h5>EPT: </h5>
-                            <p id="roadEPT"></p>
+                      <div class="col-sm-4">
+                        <div class="ept d-flex justify-content-start align-items-center">
+                          <h5>EPT: </h5>
+                          <p id="roadEPT"></p>
                         </div>
                       </div>
                     </div> <!--close row-->

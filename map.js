@@ -12,12 +12,12 @@ let ramp = 0 ;
 let aadt = "" ;
 let estimaadt = 0 ;
 
+let nfcFilter = null
 const numFmt = d3.format(',')
-const nfcFilter = null
-const aadtEstTileset = 'aadt_prrds_webapp-duixqj'
+const aadtEstTileset = 'aadt_prrds_webapp-duhkaf'
 const aadtEstTilesetSrc = {
     type: 'vector',
-    url: 'mapbox://caoa.2908v0wr'
+    url: 'mapbox://caoa.90mzwvzz'
 }
 
 // input is roadid, populates sidebar form // return aadt
@@ -46,9 +46,9 @@ function createMap() {
     // add navigation controls
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
+    // https://docs.mapbox.com/mapbox-gl-js/api/#map#setpaintproperty
+    // https://docs.mapbox.com/help/tutorials/mapbox-gl-js-expressions/    
     map.on('load', () => {
-        // https://docs.mapbox.com/mapbox-gl-js/api/#map#setpaintproperty
-        // https://docs.mapbox.com/help/tutorials/mapbox-gl-js-expressions/       
         map.addLayer({
             "id": "all-roads",
             "type": "line",
@@ -79,7 +79,7 @@ function createMap() {
                     1 // transparent
                     ]
             },
-        });        
+        });    
     });
 
     map.on('click', 'all-roads', e => {
@@ -122,9 +122,6 @@ function initRadio() {  // basemap radio button
         map.setStyle(`mapbox://styles/${layer}`);
         currentLayer = this.value;
         d3.select('#nfc-button').property('disabled', currentLayer === 'streets-v11' ? false : true)
-        if (currentLayer === 'streets-v11') {
-            map.setFilter("all-roads", nfcFilter)
-        }
     })
     d3.selectAll('.dropdown-item').on('click', function() { // updateRadio
         const value = d3.select(this).attr("value")
@@ -139,16 +136,20 @@ function initRadio() {  // basemap radio button
 }
 
 function updateValues(data){
-    d3.select("#inputfieldNFC").property('value', data['NFC']);
-    d3.select("#inputfieldRAMP").property('value', data['Ramp']);
-    d3.select("#inputfieldRU").property('value', data['RU_LR']);
-    d3.select("#inputfieldHOUSING").property('value', data['Housing']);
-    d3.select("#valRDNAME").text('Alex St');
-    d3.select("#roadPR").text('500');
-    d3.select("#roadBPT").text('201');
-    d3.select("#roadEPT").text('101');
-    d3.select("#semcogAADT").text('2020');
-    d3.select("#estimatedAADT").text('742')
+    d3.select("#inputNFC").property('value', data['NFC']);
+    d3.select("#inputRAMP").property('value', data['Ramp']);
+    d3.select("#inputPopulation").property('value', data['Population']);
+    d3.select("#inputRU").property('value', data['RU_LR']);
+    d3.select("#inputHOUSING").property('value', data['Housing']);
+    d3.select("#inputMedianInc").property('value', data['MedianInc']);
+    d3.select("#inputRegion").property('value', data['ProspReg']);
+    d3.select("#inputRUCA").property('value', data['RUCACde']);
+    d3.select("#RDNAME").text(data['ROADNM']);
+    d3.select("#roadPR").text(data['PR']);
+    d3.select("#roadBPT").text(data['BPT']);
+    d3.select("#roadEPT").text(data['EPT']);
+    d3.select("#semcogAADT").text('2,020');
+    d3.select("#estimatedAADT").text(numFmt(data['RFfit']))
 };
 
 function createTableTemplate(data) {

@@ -162,6 +162,10 @@ function createTableTemplate(data) {
     </thead>
     <tbody>
         <tr>
+            <td class="text-left">Road Name</td>
+            <td class="tabledata text-right">${data['ROADNM']}</td>
+        </tr>
+        <tr>
             <td class="text-left">NFC</td>
             <td class="tabledata text-right">${data['NFC']}</td>
         </tr>
@@ -193,6 +197,18 @@ function createTableTemplate(data) {
             <td class="text-left">RUCA Code</td>
             <td class="tabledata text-right">${data['RUCACde']}</td>
         </tr>
+        <tr>
+            <td class="text-left">PR</td>
+            <td class="tabledata text-right">${data['PR']}</td>
+        </tr>
+        <tr>
+            <td class="text-left">BPT</td>
+            <td class="tabledata text-right">${data['BPT']}</td>
+        </tr>
+        <tr>
+            <td class="text-left">EPT</td>
+            <td class="tabledata text-right">${data['EPT']}</td>
+        </tr>        
     </tbody>
     </table>`
 }

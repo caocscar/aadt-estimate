@@ -101,7 +101,6 @@ function createMap() {
         ];
         // map.setFilter("roads-highlighted", filter)
         // map.setPaintProperty('roads-highlighted', 'line-color', 'black');
-        updateValues(e.features[0].properties);
     })
     // https://bl.ocks.org/danswick/4906b495e0b206758f71
     map.on('mouseenter', 'reducedallroads', () => {
@@ -134,23 +133,6 @@ function initRadio() {  // basemap radio button
         map.setFilter("all-roads", nfcFilter)        
     })
 }
-
-function updateValues(data){
-    d3.select("#inputNFC").property('value', data['NFC']);
-    d3.select("#inputRAMP").property('value', data['Ramp']);
-    d3.select("#inputPopulation").property('value', data['Population']);
-    d3.select("#inputRU").property('value', data['RU_LR']);
-    d3.select("#inputHOUSING").property('value', data['Housing']);
-    d3.select("#inputMedianInc").property('value', data['MedianInc']);
-    d3.select("#inputRegion").property('value', data['ProspReg']);
-    d3.select("#inputRUCA").property('value', data['RUCACde']);
-    d3.select("#RDNAME").text(data['ROADNM']);
-    d3.select("#roadPR").text(data['PR']);
-    d3.select("#roadBPT").text(data['BPT']);
-    d3.select("#roadEPT").text(data['EPT']);
-    d3.select("#semcogAADT").text('2,020');
-    d3.select("#estimatedAADT").text(numFmt(data['RFfit']))
-};
 
 function createTableTemplate(data) {
     return `<table class="table table-sm table-striped">

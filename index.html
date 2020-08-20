@@ -39,7 +39,7 @@
   <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
   <div class = "container-fluid">
     <div class = "row content" id="content">
-      <div class= "col-md-9">
+      <div class= "col-md-12">
         <div class = "row mapboxmap">
           <div class = "col-sm-12">
               <div id="map"></div>
@@ -84,98 +84,8 @@
                 </dl>
             </div> <!--close maplegend-->
           </div> <!--close colsm5 mapkey-->
-          <div class="col-sm-7 searchstuff">
-            <div class = "row findRoad">
-                <div class = "col-sm-12">
-                    <h3 class="findroadheader" id="RDNAME">Road Name</h3>
-                    <div class="row">
-                      <div class="col-sm-4">
-                        <div class="pr d-flex justify-content-start align-items-center">
-                          <h5>PR: </h5>
-                          <p id="roadPR"></p>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="bpt d-flex justify-content-start align-items-center">
-                          <h5>BPT: </h5>
-                          <p id="roadBPT"></p>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="ept d-flex justify-content-start align-items-center">
-                          <h5>EPT: </h5>
-                          <p id="roadEPT"></p>
-                        </div>
-                      </div>
-                    </div> <!--close row-->
-                </div> <!-- close col 12-->
-              </div> <!-- close row findRoad-->
-          </div> <!--close searchstuff-->
         </div> <!--close row-->        
       </div> <!-- close col 9-->
-      <div class="col-md-3 infobar">
-        <div class="unchangingVals">
-          <h4>AADT - SEMCOG</h4>
-          <p class="aadt-value" id="semcogAADT">0</p>
-          <h4>AADT - ESTIMATED</h4>
-          <p class="aadt-value" id="estimatedAADT">0</p>
-        </div>
-        <form onsubmit="calculateNewAADT()">
-          <h4>Road Attributes</h4>          
-          <div class = "form group">
-            <div class= "labels d-flex justify-content-start align-items-center">
-              <label for="inputNFC">NFC</label>
-              <small class = "form-text text-muted">Between 0 and 7</small>
-            </div>
-            <input type="number" class = "form-control" id="inputNFC" aria-label="Functional Class" value="5" min="1" max="7" disabled>
-          </div>
-          <div class = "form group">
-            <div class= "labels d-flex justify-content-start align-items-center">
-              <label for="inputRAMPID">RAMP</label>
-              <small class = "form-text text-muted">0 = No, 1= Yes</small>
-            </div>
-            <input type="number" class = "form-control" id="inputRAMPID" aria-label="Ramp" value="0" min="0" max="1" disabled>
-          </div>
-          <div class = "form group">
-            <div class= "labels d-flex justify-content-start align-items-center">
-              <label for="inputPopulation">Population</label>
-            </div>
-          <input type="number" class = "form-control" id="inputPopulation" aria-label="Population" value="0" min="0" disabled>
-        </div>
-          <div class = "form group">
-            <div class= "labels d-flex justify-content-start align-items-center">
-              <label for="inputRU">RURAL/URBAN</label>
-              <small class = "form-text text-muted">0 = Rural, 1= Urban</small>
-            </div>
-            <input type="number" class = "form-control" id="inputRU" aria-label="Rural or Urban" value="1" min="1" max="4" disabled>
-          </div>
-          <div class = "form group">
-            <div class= "labels d-flex justify-content-start align-items-center">
-              <label for="inputHOUSING">HOUSING UNITS IN CENSUS TRACT</label>
-            </div>
-            <input type="number" class = "form-control" id="inputHOUSING" aria-label="Housing" value="0" min="0" disabled>
-          </div>
-          <div class = "form group">
-            <div class= "labels d-flex justify-content-start align-items-center">
-              <label for="inputMedianInc">MEDIAN INCOME IN CENSUS TRACT</label>
-            </div>
-            <input type="number" class = "form-control" id="inputMedianInc" aria-label="Median Income" value="0" min="0" disabled>
-          </div>
-          <div class = "form group">
-            <div class= "labels d-flex justify-content-start align-items-center">
-              <label for="inputRegion">PROSPERITY REGION</label>
-            </div>
-            <input type="string" class = "form-control" id="inputRegion" aria-label="Prosperity Region" value="Money" disabled>
-          </div>
-          <div class = "form group">
-            <div class= "labels d-flex justify-content-start align-items-center">
-              <label for="inputRUCA">RUCA CODE</label>
-            </div>
-            <input type="string" class = "form-control" id="inputRUCA" aria-label="RUCA Code" value="Pit" disabled>
-          </div>
-          <!-- <button type="submit" class = "btn btn-primary submitbutton" onclick = "calculateNewAADT()">Calculate AADT</button> -->
-        </form>
-      </div> <!-- close col 3-->
     </div>
   </div>
   <script>

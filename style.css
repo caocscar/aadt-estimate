@@ -190,9 +190,14 @@ small {
 }
 
 #menu {
-  position: fixed;
-  top: 60px;
-  background: #eee;
-  padding: 10px;
-  font-family: 'Open Sans', sans-serif;
+    position: fixed;
+    top: 60px;
+    background: #eee;
+    padding: 10px;
+    font-family: 'Open Sans', sans-serif;
 }
+
+/* .road-attributes, .mapboxgl-popup-content {
+    overflow-y: scroll !important;
+    overflow-x: scroll !important;
+} */

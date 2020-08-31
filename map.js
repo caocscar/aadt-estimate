@@ -60,17 +60,17 @@ function createMap() {
                     ['linear'],
                     ['zoom'],
                     10, 1, // zoom, width
-                    16, 4, // zoom, width
+                    16, 5, // zoom, width
                     ],
                 "line-color": 
                     ["step",
                     ["get", "RFfit"],
-                    'gray', 1, //gray
-                    '#FF7D01', 1000,  //lightest
-                    '#BF5C00', 6000, //light
-                    '#994A00', 8000,  //medium
-                    '#522700', 10000, //dark
-                    '#170B00' //darkest
+                    //'gray', 1, //gray
+                    "#fef0d9", 1000,  //lightest
+                    "#fdcc8a", 6000, //light
+                    "#fc8d59", 8000,  //medium
+                    "#e34a33", 10000, //dark
+                    "#b30000" //darkest
                     ],
                 "line-opacity":
                     ["step",
@@ -111,6 +111,68 @@ function createMap() {
         map.getCanvas().style.cursor = '';
     });
     initRadio()
+    addLegend()
+
+    function addLegend() {
+        // Setup our svg layer that we can manipulate with d3
+        let container = map.getCanvasContainer()
+        let svg = d3.select(container).append("svg")
+            .attr('id', 'mapbox-legend')
+
+        const wd = 20
+        const h = wd
+        const n = 5
+        const xpos = 5
+        const ypos = 600-wd*(n+4)
+        let xoffset = 10
+        let yoffset = wd+10
+        const colorScale = d3.scaleThreshold()
+            .domain([1000,6000,8000,10000])
+            .range(d3.schemeOrRd[5])
+
+        let legend = svg.append('g')
+            .attr('class', 'legend')
+            .attr('transform', `translate(${xpos},${ypos})`)
+
+        legend.append('rect')
+            .attr('id', 'legend-background')
+            .attr('x', xoffset)
+            .attr('y', 0)
+            .attr('width', 140)
+            .attr('height', h*(n+2))
+        
+        let rects = legend.selectAll(".swatch")
+          .data(colorScale.range())
+          .join("rect")
+            .attr('class','swatch')
+            .attr('x', xoffset*2)
+            .attr('y', (d,i) => i*h+yoffset)
+            .attr('width', wd)
+            .attr('height', h)
+            .style('fill', d => d)
+            .style('fill-opacity', 1)
+
+        let labels = legend.selectAll('text')
+            .data([0].concat(colorScale.domain()))
+            .join('text')
+              .attr('class', 'swatch-label')
+              .attr('x', wd+6+xoffset*2)
+              .attr('y', (d,i) => i*h+h/2+yoffset)
+              .attr('dy', '.35em')
+              .style('font-size', '1.2em')
+              .text((d,i,arr) => LegendText(d,i,arr));
+        
+        legend.append('text')
+            .attr('id', 'legend-title')
+            .attr('x', xoffset*2)
+            .attr('y', wd)
+            .text('AADT Estimate')
+          
+        function LegendText(d,i,arr) {
+            const numFmt = d3.format(',')
+            return i < arr.length-1 ? `${numFmt(d)} - ${numFmt(arr[i+1].__data__)}` : `${numFmt(d)}+`
+        }
+    }
 }
 
 currentLayer = 'streets-v11'

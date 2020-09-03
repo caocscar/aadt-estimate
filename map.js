@@ -82,7 +82,7 @@ function createMap() {
     //     });    
     // });
 
-    map.on('click', 'aads-prrds-webapp-duhkaf', e => {
+    map.on('click', 'aadt-prrds-webapp-duhkaf', e => {
 
         if (typeof popup !== 'undefined' && popup.isOpen()) popup.remove()
         popup = new mapboxgl.Popup()

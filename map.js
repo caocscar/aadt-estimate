@@ -46,42 +46,6 @@ function createMap() {
     // add navigation controls
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
-    // https://docs.mapbox.com/mapbox-gl-js/api/#map#setpaintproperty
-    // https://docs.mapbox.com/help/tutorials/mapbox-gl-js-expressions/    
-    // map.on('load', () => {
-    //     map.addLayer({
-    //         "id": "all-roads",
-    //         "type": "line",
-    //         "source": aadtEstTilesetSrc,
-    //         "source-layer": aadtEstTileset,
-    //         "paint": {
-    //             "line-width": [
-    //                 'interpolate',
-    //                 ['linear'],
-    //                 ['zoom'],
-    //                 10, 1, // zoom, width
-    //                 16, 5, // zoom, width
-    //                 ],
-    //             "line-color": 
-    //                 ["step",
-    //                 ["get", "RFfit"],
-    //                 //'gray', 1, //gray
-    //                 "#fef0d9", 1000,  //lightest
-    //                 "#fdcc8a", 6000, //light
-    //                 "#fc8d59", 8000,  //medium
-    //                 "#e34a33", 10000, //dark
-    //                 "#b30000" //darkest
-    //                 ],
-    //             "line-opacity":
-    //                 ["step",
-    //                 ["get", "RFfit"],
-    //                 0, 1, // opaque
-    //                 1 // transparent
-    //                 ]
-    //         },
-    //     });    
-    // });
-
     map.on('click', 'aadt-prrds-webapp-duhkaf', e => {
 
         if (typeof popup !== 'undefined' && popup.isOpen()) popup.remove()

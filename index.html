@@ -39,39 +39,31 @@
   <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
   <div class = "container-fluid">
     <div class = "row content" id="content">
-      <div class= "col-md-12">
-        <div class = "row mapboxmap">
-          <div class = "col-sm-12">
-              <div id="map"></div>
-              <div id="menu">
-                <input class="basemap" id="streets-v11" type="radio" name="baselayer" value="streets-v11" checked>
-                <label for="streets-v11">streets</label>
-                <input class="basemap" id="satellite-v9" type="radio" name="baselayer" value="satellite-v9">
-                <label for="satellite-v9">satellite</label>
-                <!-- <input class="basemap" id="satellite-streets-v11" type="radio" name="baselayer" value="satellite-streets-v11">
-                <label for="satellite-streets-v11">satellite</label> -->
-              </div>
-          </div> <!--close col 12-->
-        </div> <!-- close row mapboxmap-->
-        <div class="row dropdowns">
-          <div class="col-sm-12">
-            <div class="dropdown btn-group dropright">
-              <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="nfc-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter NFC</button>
-              <div class="dropdown-menu time-period" id="NFC" aria-labelledby="nfc-button">
-                <a class="dropdown-item active" id="nfc-all" value="all" checked>Select All</a>
-                <a class="dropdown-item" id="nfc-1" value="1">NFC = 1</a>
-                <a class="dropdown-item" id="nfc-2" value="2">NFC = 2</a>
-                <a class="dropdown-item" id="nfc-3" value="3">NFC = 3</a>
-                <a class="dropdown-item" id="nfc-4" value="4">NFC = 4</a>
-                <a class="dropdown-item" id="nfc-5" value="5">NFC = 5</a>
-                <a class="dropdown-item" id="nfc-6" value="6">NFC = 6</a>
-                <a class="dropdown-item" id="nfc-7" value="7">NFC = 7</a>
-                <a class="dropdown-item" id="nfc-0" value="0">NFC = 0</a>
-              </div>
-            </div>
+      <div class="col-md-2 sidenav">
+        <div class="dropdown btn-group">
+          <button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="nfc-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter NFC</button>
+          <div class="dropdown-menu" aria-labelledby="nfc-button" id="NFC" >
+            <a class="dropdown-item active" id="nfc-all" value="all" checked>Select All</a>
+            <a class="dropdown-item" id="nfc-1" value="1">NFC = 1</a>
+            <a class="dropdown-item" id="nfc-2" value="2">NFC = 2</a>
+            <a class="dropdown-item" id="nfc-3" value="3">NFC = 3</a>
+            <a class="dropdown-item" id="nfc-4" value="4">NFC = 4</a>
+            <a class="dropdown-item" id="nfc-5" value="5">NFC = 5</a>
+            <a class="dropdown-item" id="nfc-6" value="6">NFC = 6</a>
+            <a class="dropdown-item" id="nfc-7" value="7">NFC = 7</a>
+            <a class="dropdown-item" id="nfc-0" value="0">NFC = 0</a>
           </div>
         </div>
-      </div> <!-- close col 9-->
+      </div>
+      <div class="col-md-10">
+        <div id="map"></div>
+        <div id="menu">
+          <input class="basemap" id="streets-v11" type="radio" name="baselayer" value="streets-v11" checked>
+          <label for="streets-v11">streets</label>
+          <input class="basemap" id="satellite-v9" type="radio" name="baselayer" value="satellite-v9">
+          <label for="satellite-v9">satellite</label>
+        </div>
+      </div>
     </div>
   </div>
   <script>

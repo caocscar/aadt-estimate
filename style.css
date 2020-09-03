@@ -1,24 +1,18 @@
-/* body {
-    position: relative;
-} */
-
 #content {
     height:100%;
 }
 
 .row.content {
     height: auto;
-    padding: 10px;
+    padding: 0px;
 }
 
 #map, #mapbox-legend {
-    width: inherit;
+    width: 100%;
     height: 600px;
     position: relative; /* needed for legend to appear on top */
-    top: 0px;
 }
 
-/* basic positioning */
 #legend-background {
     fill: white;
     fill-opacity: 0.9;
@@ -40,53 +34,15 @@
 }
 
 .mapboxgl-popup-close-button {
-    padding: 3px !important;
+    padding: 0px !important;
 }
 
-.infobar {
-    background-color:	#efe9e1;
-}
-
-form {
-    padding: 10px 0px;
-    padding-bottom: 15px;
-}
-
-h3 {
-    padding-bottom: 0px;
-}
-
-.group {
-    padding: 10px 0px;
-}
-
-h6 {
-    font-weight: bold;
-}
-
-label {
-    font-weight: bold;
+.sidenav {
+    background-color:#753864;    
 }
 
 .searchfield {
     width: 80%;
-}
-
-h5 {
-    font-size: 12pt;
-    margin: 0px;
-}
-
-.unchangingVals {
-    margin-top: 0px;
-    padding: 5px;
-    /* border: 1px solid green; */
-    border-bottom: 1px dashed black;
-}
-
-.aadt-value {
-    font-size: 2em;
-    color: red;
 }
 
 header {
@@ -108,54 +64,15 @@ header img {
     height: 40px;
 }
 
-.findroadheader {
-    margin: 0px;
-    padding: 0px;
-}
-
-#findsection {
-    padding: 0px 5px;
-}
-
-#roadPR {
-    margin: 0px;
-    padding-left: 5px;
-}
-
-#roadBPT {
-    margin: 0px;
-    padding-left: 5px;
-}
-
-#roadEPT {
-    margin: 0px;
-    padding-left: 5px;
-}
-
-.pr, .bpt, .ept {
-    padding: 10px 0px;
-}
-
-label {
-    margin: 0px;
-    padding: 0px;
-  }
-
-small {
-    margin: 0px !important;
-    padding: 0px;
-    padding-left: 5px;
-}
-
 @media screen and (min-width:768px) {
     body {
         height: 100vh;
     }
 }
-
+/* basemap toggle */
 #menu {
-    position: fixed;
-    top: 60px;
+    position: absolute;
+    top: 10px;
     background: #eee;
     padding: 10px;
     font-family: 'Open Sans', sans-serif;

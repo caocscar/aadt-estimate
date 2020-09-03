@@ -27,8 +27,8 @@ function createMap() {
     map = new mapboxgl.Map({
         container: 'map',
         // style: 'mapbox://styles/stchoi/cjz8u2gky3dqn1cmxm71d6yus',
-        // style: 'mapbox://styles/caoa/cke1jum1500em19s12mx8hina',
-        style: 'mapbox://styles/mapbox/streets-v11',
+        style: 'mapbox://styles/caoa/cke1jum1500em19s12mx8hina',
+        // style: 'mapbox://styles/mapbox/streets-v11',
         center: [-84.554, 42.734],
         zoom: 15.5,
         maxBounds: [[-100, 36], [-75, 52]],
@@ -48,41 +48,41 @@ function createMap() {
 
     // https://docs.mapbox.com/mapbox-gl-js/api/#map#setpaintproperty
     // https://docs.mapbox.com/help/tutorials/mapbox-gl-js-expressions/    
-    map.on('load', () => {
-        map.addLayer({
-            "id": "all-roads",
-            "type": "line",
-            "source": aadtEstTilesetSrc,
-            "source-layer": aadtEstTileset,
-            "paint": {
-                "line-width": [
-                    'interpolate',
-                    ['linear'],
-                    ['zoom'],
-                    10, 1, // zoom, width
-                    16, 5, // zoom, width
-                    ],
-                "line-color": 
-                    ["step",
-                    ["get", "RFfit"],
-                    //'gray', 1, //gray
-                    "#fef0d9", 1000,  //lightest
-                    "#fdcc8a", 6000, //light
-                    "#fc8d59", 8000,  //medium
-                    "#e34a33", 10000, //dark
-                    "#b30000" //darkest
-                    ],
-                "line-opacity":
-                    ["step",
-                    ["get", "RFfit"],
-                    0, 1, // opaque
-                    1 // transparent
-                    ]
-            },
-        });    
-    });
+    // map.on('load', () => {
+    //     map.addLayer({
+    //         "id": "all-roads",
+    //         "type": "line",
+    //         "source": aadtEstTilesetSrc,
+    //         "source-layer": aadtEstTileset,
+    //         "paint": {
+    //             "line-width": [
+    //                 'interpolate',
+    //                 ['linear'],
+    //                 ['zoom'],
+    //                 10, 1, // zoom, width
+    //                 16, 5, // zoom, width
+    //                 ],
+    //             "line-color": 
+    //                 ["step",
+    //                 ["get", "RFfit"],
+    //                 //'gray', 1, //gray
+    //                 "#fef0d9", 1000,  //lightest
+    //                 "#fdcc8a", 6000, //light
+    //                 "#fc8d59", 8000,  //medium
+    //                 "#e34a33", 10000, //dark
+    //                 "#b30000" //darkest
+    //                 ],
+    //             "line-opacity":
+    //                 ["step",
+    //                 ["get", "RFfit"],
+    //                 0, 1, // opaque
+    //                 1 // transparent
+    //                 ]
+    //         },
+    //     });    
+    // });
 
-    map.on('click', 'all-roads', e => {
+    map.on('click', 'aads-prrds-webapp-duhkaf', e => {
 
         if (typeof popup !== 'undefined' && popup.isOpen()) popup.remove()
         popup = new mapboxgl.Popup()
@@ -179,7 +179,7 @@ currentLayer = 'streets-v11'
 function initRadio() {  // basemap radio button
     d3.selectAll('.basemap').on('click', function() { // updateRadio
         if (this.value === currentLayer) return;
-        const layer = this.value === 'streets-v11' ? 'mapbox/streets-v11' : 'mapbox/satellite-v9'
+        const layer = this.value === 'streets-v11' ? 'caoa/cke1jum1500em19s12mx8hina' : 'mapbox/satellite-v9'
         map.setStyle(`mapbox://styles/${layer}`);
         currentLayer = this.value;
         d3.select('#nfc-button').property('disabled', currentLayer === 'streets-v11' ? false : true)

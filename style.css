@@ -31,6 +31,11 @@ header img {
     background-color: #35526f;    
 }
 
+.btn-group {
+    top: 5px;
+    left: 5px;
+}
+
 #map, #mapbox-legend {
     width: 100%;
     height: 600px;

@@ -14,6 +14,7 @@ let estimaadt = 0 ;
 
 let nfcFilter = null
 const numFmt = d3.format(',')
+const aadtLayer = 'aadt-prrds-webapp-duhkaf'
 const aadtEstTileset = 'aadt_prrds_webapp-duhkaf'
 const aadtEstTilesetSrc = {
     type: 'vector',
@@ -46,7 +47,7 @@ function createMap() {
     // add navigation controls
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
-    map.on('click', 'aadt-prrds-webapp-duhkaf', e => {
+    map.on('click', aadtLayer, e => {
 
         if (typeof popup !== 'undefined' && popup.isOpen()) popup.remove()
         popup = new mapboxgl.Popup()
@@ -156,7 +157,7 @@ function initRadio() {  // basemap radio button
         d3.selectAll('.dropdown-item').classed('active', false)
         d3.select(`#nfc-${value}`).classed('active', true)
         nfcFilter = value === "all" ? null : ['==', ['get','NFC'], parseInt(value)]
-        map.setFilter("all-roads", nfcFilter)        
+        map.setFilter(aadtLayer, nfcFilter)        
     })
 }
 

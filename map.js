@@ -1,17 +1,4 @@
-//globals that update and are updated
-let pr = 0 ;
-let bpt = "";
-let ept = "" ;
-let rdname = '' ;
-let nfc = 0 ;
-let censustract = "" ;
-let ru = 0 ;
-let housing = 0 ;
-let novehicle = "" ;
-let ramp = 0 ;
-let aadt = "" ;
-let estimaadt = 0 ;
-
+let currentLayer = 'streets-v11'
 let nfcFilter = null
 const numFmt = d3.format(',')
 const aadtLayer = 'aadt-prrds-webapp-duhkaf'
@@ -125,7 +112,6 @@ function createMap() {
     }
 }
 
-currentLayer = 'streets-v11'
 function initRadio() {  // basemap radio button
     d3.selectAll('.basemap').on('click', function() { // updateRadio
         if (this.value === currentLayer) return;

@@ -131,7 +131,8 @@ function initRadio() {  // basemap radio button
         if (this.value === currentLayer) return;
         const layer = this.value === 'streets-v11' ? 'caoa/cke1jum1500em19s12mx8hina' : 'mapbox/satellite-v9'
         map.setStyle(`mapbox://styles/${layer}`);
-        d3.select('#nfc-button').property('disabled', this.value === 'streets-v11' ? false : true)
+        currentLayer = this.value
+        d3.select('#nfc-button').property('disabled', currentLayer === 'streets-v11' ? false : true)
     })
     d3.selectAll('.dropdown-item').on('click', function() { // updateRadio
         const value = d3.select(this).attr("value")

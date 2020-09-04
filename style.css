@@ -32,10 +32,16 @@ header img {
 }
 
 .btn-group {
-    top: 5px;
-    left: 5px;
+    top: 10px;
+    left: 10px;
 }
 
+@media all and (max-width: 768px) {
+    .btn-group {
+        top: 0px;
+    }
+}
+/* mapbox */
 #map, #mapbox-legend {
     width: 100%;
     height: 600px;

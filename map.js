@@ -23,13 +23,10 @@ const aadtEstTilesetSrc = {
 
 // input is roadid, populates sidebar form // return aadt
 function createMap() {
-    // mapboxgl.accessToken = 'pk.eyJ1Ijoic3RjaG9pIiwiYSI6ImNqd2pkNWN0NzAyNnE0YW8xeTl5a3VqMXQifQ.Rq3qT82-ysDHcMsHGTBiQg';
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2FvYSIsImEiOiJja2R5dG1nb2sxbmtrMnFramJ2cHZocW9vIn0.KiBj_uGpdHlAlWZ5YUKZKA';
     map = new mapboxgl.Map({
         container: 'map',
-        // style: 'mapbox://styles/stchoi/cjz8u2gky3dqn1cmxm71d6yus',
         style: 'mapbox://styles/caoa/cke1jum1500em19s12mx8hina',
-        // style: 'mapbox://styles/mapbox/streets-v11',
         center: [-84.554, 42.734],
         zoom: 15.5,
         maxBounds: [[-100, 36], [-75, 52]],
@@ -48,25 +45,13 @@ function createMap() {
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
 
     map.on('click', aadtLayer, e => {
-
         if (typeof popup !== 'undefined' && popup.isOpen()) popup.remove()
         popup = new mapboxgl.Popup()
             .setLngLat(e.lngLat)
             .setHTML(createTableTemplate(e.features[0].properties))
             .addTo(map)
-
-        let features = e.features
-        let properties = e.features[0].properties;
-
-        let filter = [
-            "all",
-            ["in", "PR", properties['PR']],
-            ["in", "BPT", properties['BPT']],
-            ["in", "EPT", properties['EPT']],
-        ];
-        // map.setFilter("roads-highlighted", filter)
-        // map.setPaintProperty('roads-highlighted', 'line-color', 'black');
     })
+
     // https://bl.ocks.org/danswick/4906b495e0b206758f71
     map.on('mouseenter', 'reducedallroads', () => {
         map.getCanvas().style.cursor = 'pointer';
@@ -146,8 +131,7 @@ function initRadio() {  // basemap radio button
         if (this.value === currentLayer) return;
         const layer = this.value === 'streets-v11' ? 'caoa/cke1jum1500em19s12mx8hina' : 'mapbox/satellite-v9'
         map.setStyle(`mapbox://styles/${layer}`);
-        currentLayer = this.value;
-        d3.select('#nfc-button').property('disabled', currentLayer === 'streets-v11' ? false : true)
+        d3.select('#nfc-button').property('disabled', this.value === 'streets-v11' ? false : true)
     })
     d3.selectAll('.dropdown-item').on('click', function() { // updateRadio
         const value = d3.select(this).attr("value")
@@ -157,7 +141,7 @@ function initRadio() {  // basemap radio button
         d3.selectAll('.dropdown-item').classed('active', false)
         d3.select(`#nfc-${value}`).classed('active', true)
         nfcFilter = value === "all" ? null : ['==', ['get','NFC'], parseInt(value)]
-        map.setFilter(aadtLayer, nfcFilter)        
+        map.setFilter(aadtLayer, nfcFilter)
     })
 }
 

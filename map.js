@@ -17,6 +17,7 @@ function createMap() {
         center: [-84.554, 42.734],
         zoom: 15.5,
         maxBounds: [[-100, 36], [-75, 52]],
+        AttributionControl: false,
     });
     // add search bar
     map.addControl(new MapboxGeocoder({
@@ -30,6 +31,10 @@ function createMap() {
     }), 'top-right');
     // add navigation controls
     map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
+    map.addControl(new mapboxgl.AttributionControl({
+        compact: true,
+        customAttribution: 'Created by Alex Cao',
+    }));
 
     map.on('click', aadtLayer, e => {
         if (typeof popup !== 'undefined' && popup.isOpen()) popup.remove()

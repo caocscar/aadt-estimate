@@ -2,11 +2,11 @@ let currentLayer = 'streets-v11'
 let nfcFilter = null
 const numFmt = d3.format(',')
 const aadtLayer = 'aadt-prrds-webapp-duhkaf'
-const aadtEstTileset = 'aadt_prrds_webapp-duhkaf'
-const aadtEstTilesetSrc = {
-    type: 'vector',
-    url: 'mapbox://caoa.90mzwvzz'
-}
+// const aadtEstTileset = 'aadt_prrds_webapp-duhkaf'
+// const aadtEstTilesetSrc = {
+//     type: 'vector',
+//     url: 'mapbox://caoa.90mzwvzz'
+// }
 
 // input is roadid, populates sidebar form // return aadt
 function createMap() {
@@ -17,7 +17,7 @@ function createMap() {
         center: [-84.554, 42.734],
         zoom: 15.5,
         maxBounds: [[-100, 36], [-75, 52]],
-        AttributionControl: false,
+        attributionControl: false,
     });
     // add search bar
     map.addControl(new MapboxGeocoder({
@@ -30,11 +30,11 @@ function createMap() {
         placeholder: 'Search Map',
     }), 'top-right');
     // add navigation controls
-    map.addControl(new mapboxgl.NavigationControl(), 'bottom-right');
     map.addControl(new mapboxgl.AttributionControl({
         compact: true,
         customAttribution: 'Created by Alex Cao',
     }));
+    map.addControl(new mapboxgl.NavigationControl(), 'top-right');
 
     map.on('click', aadtLayer, e => {
         if (typeof popup !== 'undefined' && popup.isOpen()) popup.remove()

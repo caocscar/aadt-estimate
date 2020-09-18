@@ -1,19 +1,14 @@
 let currentLayer = 'streets-v11'
 let nfcFilter = null
 const numFmt = d3.format(',')
-const aadtLayer = 'aadt-prrds-webapp-duhkaf'
-// const aadtEstTileset = 'aadt_prrds_webapp-duhkaf'
-// const aadtEstTilesetSrc = {
-//     type: 'vector',
-//     url: 'mapbox://caoa.90mzwvzz'
-// }
+const aadtLayer = 'roads'
 
 // input is roadid, populates sidebar form // return aadt
 function createMap() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoiY2FvYSIsImEiOiJja2R5dG1nb2sxbmtrMnFramJ2cHZocW9vIn0.KiBj_uGpdHlAlWZ5YUKZKA';
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWFkdC1lc3RpbWF0ZSIsImEiOiJja2Y3M3EzMjIwMW9nMnRxbDg2bWxxbGFzIn0.QQYkeNaxw0V5TCw0lYIjTA';
     map = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/caoa/cke1jum1500em19s12mx8hina',
+        style: 'mapbox://styles/aadt-estimate/ckf8mimvs1lya19o0ghks63h9',
         center: [-84.554, 42.734],
         zoom: 15.5,
         maxBounds: [[-100, 36], [-75, 52]],
@@ -44,14 +39,6 @@ function createMap() {
             .addTo(map)
     })
 
-    // https://bl.ocks.org/danswick/4906b495e0b206758f71
-    map.on('mouseenter', 'reducedallroads', () => {
-        map.getCanvas().style.cursor = 'pointer';
-    });
-    // Change it back to a pointer when it leaves.
-    map.on('mouseleave', 'reducedallroads', () => {
-        map.getCanvas().style.cursor = '';
-    });
     initRadio()
     addLegend()
 
